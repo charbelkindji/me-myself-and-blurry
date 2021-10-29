@@ -6,4 +6,4 @@ matplotlib==3.4.3
 numpy==1.19.5
 gunicorn
 opencv-python-headless==4.5.4.58
-tensorflow==2.6.0
+tensorflow-cpu==2.6.0
