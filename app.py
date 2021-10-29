@@ -114,9 +114,7 @@ def upload_file():
     file = request.files['image']
 
     # Save the file to static/images/uploads
-    basepath = os.path.dirname(__file__)
-    full_file_path = os.path.join(
-        basepath, 'static/img/uploads/', secure_filename(file.filename))
+    full_file_path = os.path.join('static/img/uploads/', secure_filename(file.filename))
 
     file.save(full_file_path)
     short_path = 'img/uploads/' + secure_filename(file.filename)
