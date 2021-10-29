@@ -63,23 +63,23 @@
                         <form action="/" id="settingsForm" method="post" enctype="multipart/form-data">
 
                             <div class="fs-5 mb-5">
-                                <input type="file" required class="form-control-file" name="image" accept=".jpg, .png, .jpeg" id="imageToPredict">
+                                <input type="file" required class="form-control-file" name="image" accept=".jpg, .png, .jpeg" id="image">
                             </div>
                             <p class="lead">Define your settings</p>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" checked value="" id="blurFaces">
+                                <input class="form-check-input" type="checkbox" checked name="blurFaces" value="blurFaces" id="blurFaces">
                                 <label class="form-check-label" for="blurFaces">
                                     Blur faces
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="showBoxes">
+                                <input class="form-check-input" type="checkbox" name="showBoxes" value="showBoxes" id="showBoxes">
                                 <label class="form-check-label" for="showBoxes">
                                     Show boxes
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="showKeypoints">
+                                <input class="form-check-input" type="checkbox" name="showKeypoints" value="showKeypoints" id="showKeypoints">
                                 <label class="form-check-label" for="showKeypoints">
                                     Show key points
                                 </label>
@@ -114,8 +114,7 @@
                  // Hide loader and title
                 hide_and_show(loading=false)
 
-
-                $('#submitBtn').click(function() {
+                $('#settingsForm').submit(function() {
                     checked = $("input[type=checkbox]:checked").length;
 
                     if(!checked) {
@@ -124,8 +123,11 @@
                     } else
                     {
                         // Everything is okay. Show loader and hide form.
-                       hide_and_show(loading=true)
+                        hide_and_show(loading=true)
                     }
+                });
+
+                $('#submitBtn').click(function() {
 
                 });
             });

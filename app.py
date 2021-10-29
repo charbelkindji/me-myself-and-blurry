@@ -5,9 +5,7 @@ import numpy as np
 import cv2
 from mtcnn.mtcnn import MTCNN
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 import re
-from PIL import Image, ImageDraw
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -31,10 +29,7 @@ def homepage():
 
         # Blur image
         print(image.shape)
-        blurred_path = blur_image(image, img_name)
-        print("-***** PATHS")
-        print(short_image_path)
-        print(blurred_path)
+        blurred_path = blur_image(image, img_name, request)
 
         # Display result
         return render_template('index.html.twig',
@@ -47,26 +42,21 @@ def preprocess_image(image_path):
     :param image_path: path to the image file (uploaded file)
     :return: preprocessed image ready to be fed to the model
     """
-    # Load in grayscale
-    img = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
-    # img = cv2.imread(image_path, cv2.COLOR_BGR2RGB)
+    # img = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+    img = cv2.imread(image_path, cv2.COLOR_BGR2RGB)
 
     # Cast array
     img = np.array(img)
-    # img = Image.open(image_path)
 
-    # Return processsed image
     return img
 
-def blur_image(img, img_name, blur=True, showBoxes=True, showKeyPoints=True):
+def blur_image(img, img_name, request):
     """
     Blur image
 
     :param img: image to blur
     :param img_name: name of the image file
-    :param blur: to apply blur or not
-    :param showBoxes: to show boxes around faces or not
-    :param showKeyPoints: to show the face keypoints or not
+    :param request: the request
     :return: path to the processed image result
     """
 
@@ -82,25 +72,25 @@ def blur_image(img, img_name, blur=True, showBoxes=True, showKeyPoints=True):
     for face in faces:
         x,y,w,h = face['box']
 
-        if(showBoxes):
-            # Create a Rectangle patch
-            rect = patches.Rectangle((x, y), w, h, linewidth=1, edgecolor='r', facecolor='none')
-            # Add the patch to the Axes
-            ax.add_patch(rect)
+        if(request.form.get("showBoxes") is not None):
+            print("showBoxes process")
+            # Create a Rectangle around the face
+            img = cv2.rectangle(img,
+                                (x,y),
+                                (x+w,y+h),
+                                (0,128,0),
+                                10)
 
-        if(showKeyPoints):
-            # draw the dots
+        if(request.form.get("showKeypoints") is not None):
+            print("showKeypoints process")
+            # draw the dots for key points
             for key, value in face['keypoints'].items():
-                # create and draw dot
-                dot = patches.Circle(value, radius=30, color='blue')
-                ax.add_patch(dot)
+                radius = 20
+                img = cv2.circle(img, value, radius, (0,0,139), -1) # thickness -1 to fill the circle
 
 
-        if(blur):
-
-            # Convert Image to array
-            img = np.array(img)
-
+        if(request.form.get("blurFaces") is not None):
+            print("blurFaces process")
             roi = img[y:y+h, x:x+w]
             # applying a blur over this new rectangle area
             roi = cv2.blur(roi, (50,50))
@@ -109,7 +99,7 @@ def blur_image(img, img_name, blur=True, showBoxes=True, showKeyPoints=True):
 
     # save result
     blurred_path = 'static/img/uploads/blurred/'+img_name
-    plt.imsave(blurred_path, img)
+    plt.imsave(blurred_path, img[...,::-1]) # img[...,::-1] to keepp matplotlib from changing image colors
     # plt.savefig(blurred_path)
 
     return re.sub("static/", "", blurred_path) # we don't want the "static" part in path since full path is generated in template
