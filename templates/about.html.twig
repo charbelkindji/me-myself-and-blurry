@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Me, Myself And Blurry - Charbel KINDJI</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- Resource style -->
+
+    <script src="{{ url_for('static', filename='js/modernizr.js') }}"></script> <!-- Modernizr -->
+
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/">Me, Myself and Blurry</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-8">
+                <figure class="cd-image-container">
+                    <img src="{{ url_for('static', filename='img/base_img.jpg') }}" alt="Original Image">
+                    <span class="cd-image-label" data-type="original">Original</span>
+
+                    <div class="cd-resize-img"> <!-- the resizable image on top -->
+                        <img src="{{ url_for('static', filename='img/blur.jpg') }}" alt="Modified Image">
+                        <span class="cd-image-label" data-type="modified">Modified</span>
+                    </div>
+                    <span class="cd-handle"></span>
+                </figure>
+            </div>
+            <div class="col-md-4">
+                <h5 class="display-5 fw-bolder" id="defaultTitle">Hello World!</h5>
+                <p>
+                    I'm <a href="https://www.linkedin.com/in/gaspard-kindji/" class="footerLink">Charbel KINDJI</a>, a Big Data student who is having fun with concepts related to artificial intelligence and computer vision in particular.
+                </p>
+                <p>
+                    This is a personal project to perform some experiments with face detection and blurring.
+                    The <a href="https://github.com/ipazc/mtcnn">MTCNN</a> model is used to perform the detection.
+                    I made experiments with this model and the one offered by <a href="https://docs.opencv.org/4.5.3/d9/d80/classcv_1_1cuda_1_1CascadeClassifier.html">OpenCV</a> (link to the notebook at the bottom of the page).
+                </p>
+                <p>
+                    You can configure the results to display rectangles around the detected faces as well as to display the key points of the faces (eyes, nose and mouth).
+                </p>
+                <p>
+                    This work is still in progress and will be improved over time. The model sometimes has trouble recognizing faces that are not upright, make marked grimaces or wear sunglasses, for example.
+                    Feedback and suggestions are welcome.
+                </p>
+
+
+                <p>
+                    And finally, here are some useful links and credits to learn more:
+                    <ul>
+                        <li>The <a target="_blank" href="">notebook</a> containing some tests with these two libraries</li>
+                        <li>The <a target="_blank" href="">github repository</a>  containing this project deployed with Flask </li>
+                        <li><a target="_blank" href="https://towardsdatascience.com/face-detection-neural-network-structure-257b8f6f85d1">About the MTCNN architecture</a></li>
+                        <li><a target="_blank" href="https://towardsdatascience.com/how-does-a-face-detection-program-work-using-neural-networks-17896df8e6ff">How MTCNN works</a></li>
+                        <li><a target="_blank" href="https://medium.com/swlh/blurring-or-smoothing-out-images-opencv-3005cfc21cd2">Blurring an image with OpenCV</a></li>
+                        <li>Favicon by <a target="_blank" href="https://icones8.fr">Icons8</a></li>
+                        <li>Images by <a target="_blank" href="https://unsplash.com/@major001">@major001</a> and <a target="_blank" href="https://unsplash.com/@omarlopez1">@omarlopez1</a> from <a target="_blank" href="https://unsplash.com">Unsplash</a></li>
+                    </ul>
+                </p>
+
+                :)
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer-->
+<footer class="py-5-bottom bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">
+            By <a href="https://www.linkedin.com/in/gaspard-kindji/" class="footerLink">Charbel KINDJI</a>
+        </p>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-2.1.1.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.mobile.custom.min.js') }}"></script> <!-- Resource jQuery -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script> <!-- Resource jQuery -->
+
+</body>
+</html>

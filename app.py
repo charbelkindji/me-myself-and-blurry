@@ -122,5 +122,14 @@ def upload_file():
     short_path = 'img/uploads/' + secure_filename(file.filename)
     return full_file_path, short_path
 
+
+@app.route('/about', methods=['GET'])
+def about():
+    """
+    Display about page
+    :return:
+    """
+    return render_template("about.html.twig")
+
 if __name__ == '__main__':
     app.run(None, None, True)

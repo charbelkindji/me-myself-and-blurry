@@ -239,7 +239,7 @@ a {
   text-decoration: underline;
 }
 a:hover {
-  color: #0a58ca;
+  color: #0aca2a;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -7491,8 +7491,13 @@ textarea.form-control-lg {
 }
 
 .py-5 {
+  /*padding-top: 3rem !important;*/
+  padding-bottom: 1rem !important;
+}
+
+.py-5-bottom {
   padding-top: 3rem !important;
-  padding-bottom: 3rem !important;
+  padding-bottom: 1rem !important;
 }
 
 .pt-0 {
