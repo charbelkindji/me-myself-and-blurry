@@ -72,6 +72,14 @@ def blur_image(img, img_name, request):
     for face in faces:
         x,y,w,h = face['box']
 
+        if(request.form.get("blurFaces") is not None):
+            print("blurFaces process")
+            roi = img[y:y+h, x:x+w]
+            # applying a blur over this new rectangle area
+            roi = cv2.blur(roi, (50,50))
+            # impose this blurred image on original image to get final image
+            img[y:y+roi.shape[0], x:x+roi.shape[1]] = roi
+
         if(request.form.get("showBoxes") is not None):
             print("showBoxes process")
             # Create a Rectangle around the face
@@ -89,13 +97,6 @@ def blur_image(img, img_name, request):
                 img = cv2.circle(img, value, radius, (0,0,139), -1) # thickness -1 to fill the circle
 
 
-        if(request.form.get("blurFaces") is not None):
-            print("blurFaces process")
-            roi = img[y:y+h, x:x+w]
-            # applying a blur over this new rectangle area
-            roi = cv2.blur(roi, (50,50))
-            # impose this blurred image on original image to get final image
-            img[y:y+roi.shape[0], x:x+roi.shape[1]] = roi
 
     # save result
     blurred_path = 'static/img/uploads/blurred/'+img_name
