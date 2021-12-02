@@ -8,7 +8,7 @@ A flask project for face detection and blurring (based on the [MTCNN](https://gi
 
 ## Demo
 
-The project is currently being deployed on the Heroku platform (work in progress). It's happening [here](https://me-myself-and-blurry.herokuapp.com).
+The project is currently deployed on Heroku platform. It's happening [here](https://me-myself-and-blurry.herokuapp.com).
 
 ## Run locally
 
