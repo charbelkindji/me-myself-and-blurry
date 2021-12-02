@@ -6,6 +6,9 @@ import cv2
 from mtcnn.mtcnn import MTCNN
 import matplotlib.pyplot as plt
 import re
+import PIL
+from PIL import Image
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -113,10 +116,18 @@ def upload_file():
     # Get the file from post request
     file = request.files['image']
 
+    # Resize uploaded image
+    fixed_height = 512
+    image = Image.open(file)
+    # print(image.size)
+    height_percent = (fixed_height / float(image.size[1]))
+    width_size = int((float(image.size[0]) * float(height_percent)))
+    image = image.resize((width_size, fixed_height), PIL.Image.NEAREST)
+
     # Save the file to static/images/uploads
     full_file_path = os.path.join('static/img/uploads/', secure_filename(file.filename))
-
-    file.save(full_file_path)
+    image.save(full_file_path)
+    
     short_path = 'img/uploads/' + secure_filename(file.filename)
     return full_file_path, short_path
 
